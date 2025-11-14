@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+class ArrToAL
+{
+    public static void main(String[] args)
+    {
+        int[] arr={1,2,3,4,5};
+        List<Integer> al=new ArrayList<>();
+       for(int a:arr)
+    {
+        al.add(a);
+    }
+    System.out.println(al);
+
+    }
+}
