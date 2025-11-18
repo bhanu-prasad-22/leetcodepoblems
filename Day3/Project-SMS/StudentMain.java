@@ -98,8 +98,10 @@ public class StudentMain {
                     }
                     System.out.println("Invalid Input.");
                     break;
-                case 7: // Exit
-                    System.out.println("Exiting. Goodbye.");
+
+                case 7:
+                    service.saveToFile("students.csv");
+                    System.out.println("Saved to students.csv Exiting.GoodBye");
                     sc.close();
                     return;
 

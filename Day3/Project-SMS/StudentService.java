@@ -1,4 +1,10 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -61,4 +67,77 @@ public class StudentService {
             System.out.println(s);
         }
     }
+
+    public void saveToFile(String path) {
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(path))) {
+            for (Student s : students) {
+                String nameEscaped = s.name.replace("\"", "\"\"");
+
+                if (nameEscaped.contains(",") || nameEscaped.contains("\"")) {
+                    nameEscaped = "\"" + nameEscaped + "\"";
+
+                }
+                bw.write(s.id + "," + nameEscaped + "," + s.age);
+                bw.newLine();
+
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving students: " + e.getMessage());
+        }
+    }
+
+    public void loadFromFile(String path) {
+        students.clear();
+        Path p = Paths.get(path);
+        if (!Files.exists(p)) {
+            return;
+        }
+
+        try (BufferedReader br = Files.newBufferedReader(p)) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                List<String> parts = parseCsvLine(line);
+                if (parts.size() >= 3) {
+                    try {
+                        int id = Integer.parseInt(parts.get(0).trim());
+                        String name = parts.get(1);
+                        int age = Integer.parseInt(parts.get(2).trim());
+
+                        students.add(new Student(id, name, age));
+                    } catch (NumberFormatException e) {
+
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error loading stuident: " + e.getMessage());
+        }
+    }
+
+    private List<String> parseCsvLine(String line) {
+        List<String> out = new ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '"') {
+                if (inQuotes && i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                    cur.append('"');
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c == ',' && !inQuotes) {
+                out.add(cur.toString());
+                cur.setLength(0);
+            } else {
+                cur.append(c);
+            }
+        }
+        out.add(cur.toString());
+        return out;
+    }
+
 }
