@@ -109,6 +109,7 @@ public class StudentService {
                     }
                 }
             }
+            System.out.println("Loaded " + students.size() + " students form " + path);
 
         } catch (IOException e) {
             System.out.println("Error loading stuident: " + e.getMessage());
@@ -138,6 +139,12 @@ public class StudentService {
         }
         out.add(cur.toString());
         return out;
+    }
+
+    public long countStudentsAbove20() {
+        return students.stream()
+                .filter(s -> s.age > 20)
+                .count();
     }
 
 }

@@ -17,7 +17,9 @@ public class StudentMain {
             System.out.println("4.Search student By Id");
             System.out.println("5.Delete student By Id");
             System.out.println("6. Update Student (optional)");
-            System.out.println("7. Exit");
+            System.out.println("7.Loading data form student.csv.");
+            System.out.println("8.Count how many student are older than 20.");
+            System.out.println("9. Exit");
             System.out.println("Enter your choice:");
             int choice;
             try {
@@ -64,6 +66,7 @@ public class StudentMain {
                     } catch (Exception e) {
                         System.out.println("Invalid Input.");
                     }
+
                     break;
                 case 5:
                     try {
@@ -98,8 +101,13 @@ public class StudentMain {
                     }
                     System.out.println("Invalid Input.");
                     break;
-
                 case 7:
+                    service.loadFromFile("students.csv");
+                    break;
+                case 8:
+                    System.out.println(service.countStudentsAbove20() + " are above age 20.");
+                    break;
+                case 9:
                     service.saveToFile("students.csv");
                     System.out.println("Saved to students.csv Exiting.GoodBye");
                     sc.close();
