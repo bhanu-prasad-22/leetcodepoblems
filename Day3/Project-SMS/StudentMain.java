@@ -19,7 +19,9 @@ public class StudentMain {
             System.out.println("6. Update Student (optional)");
             System.out.println("7.Loading data form student.csv.");
             System.out.println("8.Count how many student are older than 20.");
-            System.out.println("9. Exit");
+            System.out.println("9.Students sorted by age (asc):");
+            System.out.println("10.Students sorted by age (dsc):");
+            System.out.println("11. Exit");
             System.out.println("Enter your choice:");
             int choice;
             try {
@@ -108,6 +110,16 @@ public class StudentMain {
                     System.out.println(service.countStudentsAbove20() + " are above age 20.");
                     break;
                 case 9:
+                    List<Student> asc = service.getStudentsSortedByAgeAsc();
+                    System.out.println("Students sorted by age (asc):");
+                    service.printStudents(asc);
+                    break;
+                case 10:
+                    List<Student> dsc = service.getStudentsSortedByAgeDesc();
+                    System.out.println("Students sorted by age (dsc):");
+                    service.printStudents(dsc);
+                    break;
+                case 11:
                     service.saveToFile("students.csv");
                     System.out.println("Saved to students.csv Exiting.GoodBye");
                     sc.close();

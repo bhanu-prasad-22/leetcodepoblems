@@ -147,4 +147,16 @@ public class StudentService {
                 .count();
     }
 
+    public List<Student> getStudentsSortedByAgeAsc() {
+        return students.stream()
+                .sorted(Comparator.comparingInt(s -> s.age))
+                .collect(Collectors.toList());
+    }
+
+    public List<Student> getStudentsSortedByAgeDesc() {
+        return students.stream()
+                .sorted(Comparator.comparingInt((Student s) -> s.age).reversed())
+                .collect(Collectors.toList());
+    }
+
 }
