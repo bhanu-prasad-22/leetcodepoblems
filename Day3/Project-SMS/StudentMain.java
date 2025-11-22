@@ -21,7 +21,8 @@ public class StudentMain {
             System.out.println("8.Count how many student are older than 20.");
             System.out.println("9.Students sorted by age (asc):");
             System.out.println("10.Students sorted by age (dsc):");
-            System.out.println("11. Exit");
+            System.out.println("11.Search student by name(partial match).");
+            System.out.println("12. Exit");
             System.out.println("Enter your choice:");
             int choice;
             try {
@@ -120,6 +121,17 @@ public class StudentMain {
                     service.printStudents(dsc);
                     break;
                 case 11:
+                    System.out.println("enter name to search:");
+                    String q = sc.nextLine().trim();
+                    List<Student> results
+                            = service.searchByName(q);
+                    if (results.isEmpty()) {
+                        System.out.println("No students found.");
+                    } else {
+                        service.printStudents(results);
+                    }
+                    break;
+                case 12:
                     service.saveToFile("students.csv");
                     System.out.println("Saved to students.csv Exiting.GoodBye");
                     sc.close();

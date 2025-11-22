@@ -159,4 +159,12 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+    public List<Student> searchByName(String nameFragment) {
+        String q = nameFragment.toLowerCase();
+
+        return students.stream()
+                .filter(s -> s.name.toLowerCase().contains(q))
+                .collect(Collectors.toList());
+    }
+
 }
