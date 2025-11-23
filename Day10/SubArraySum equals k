@@ -1,0 +1,19 @@
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer,Integer> prefixSum=new HashMap<>();
+        prefixSum.put(0,1);
+        int sum=0;
+        int result=0;
+        for(int num:nums)
+        {
+              sum+=num;//current prefixSum
+
+              result+=prefixSum.getOrDefault(sum-k,0);//how may previous subarrays make sum==k
+
+              prefixSum.put(sum,prefixSum.getOrDefault(sum,0)+1);//every subarrays sum is added along with frequency
+        }
+
+        return result;//return only the number subarrays sum==k
+
+    }
+}
