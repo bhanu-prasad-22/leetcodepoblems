@@ -23,6 +23,7 @@ public class StudentMain {
             System.out.println("10.Students sorted by age (dsc):");
             System.out.println("11.Search student by name(partial match).");
             System.out.println("12. Exit");
+            System.out.println("13.Export students (sorted by name)");
             System.out.println("Enter your choice:");
             int choice;
             try {
@@ -131,11 +132,15 @@ public class StudentMain {
                         service.printStudents(results);
                     }
                     break;
+
                 case 12:
                     service.saveToFile("students.csv");
                     System.out.println("Saved to students.csv Exiting.GoodBye");
                     sc.close();
                     return;
+                case 13:
+                    service.exportSortedByName("students_sorted.csv");
+                    break;
 
                 default:
                     System.out.println("Enter a valid option (1-7).");

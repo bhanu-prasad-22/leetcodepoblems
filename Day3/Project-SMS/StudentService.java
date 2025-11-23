@@ -167,4 +167,26 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+    public void exportSortedByName(String path)
+    {
+        List<Student> sorted =getStudentSortedByName();
+        try(BufferedWriter bw = Files.newBufferedWriter(Paths.get(path)))
+        {
+            for(Student s:sorted)
+            {
+                String nameEscaped=s.name.replace("\"","\"\"");
+                if(nameEscaped.contains(",") || nameEscaped.contains("\""))
+                {
+                      nameEscaped= "\"" + nameEscaped + "\"";
+                }
+                bw.write(s.id+ ","+ nameEscaped +","+s.age);
+                bw.newLine();
+            }
+            System.out.println("Export successfully -> " + path);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Eror exporting: "+e.getMessage());
+        }
+    }
 }
