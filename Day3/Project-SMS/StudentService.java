@@ -167,26 +167,43 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public void exportSortedByName(String path)
-    {
-        List<Student> sorted =getStudentSortedByName();
-        try(BufferedWriter bw = Files.newBufferedWriter(Paths.get(path)))
-        {
-            for(Student s:sorted)
-            {
-                String nameEscaped=s.name.replace("\"","\"\"");
-                if(nameEscaped.contains(",") || nameEscaped.contains("\""))
-                {
-                      nameEscaped= "\"" + nameEscaped + "\"";
+    public void exportSortedByName(String path) {
+        List<Student> sorted = getStudentSortedByName();
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(path))) {
+            for (Student s : sorted) {
+                String nameEscaped = s.name.replace("\"", "\"\"");
+                if (nameEscaped.contains(",") || nameEscaped.contains("\"")) {
+                    nameEscaped = "\"" + nameEscaped + "\"";
                 }
-                bw.write(s.id+ ","+ nameEscaped +","+s.age);
+                bw.write(s.id + "," + nameEscaped + "," + s.age);
                 bw.newLine();
             }
             System.out.println("Export successfully -> " + path);
+        } catch (Exception e) {
+            System.out.println("Eror exporting: " + e.getMessage());
         }
-        catch(Exception e)
-        {
-            System.out.println("Eror exporting: "+e.getMessage());
+    }
+
+    public void exportJson(String path) {
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(path))) {
+            bw.write("[\n");
+            for (int i = 0; i < students.size(); i++) {
+                Student s = students.get(i);
+                bw.write(" {\n");
+                bw.write("    \"id\": " + s.id + ",\n");
+                bw.write("    \"name\": \"" + s.name.replace("\"", "\\\"") + "\",\n");
+                bw.write("    \"age\": " + s.age + "\n");
+
+                if (i == students.size() - 1) {
+                    bw.write("  }\n");
+                } else {
+                    bw.write("  },\n");
+                }
+            }
+            bw.write("]\n");
+            System.out.println("Exported JSON  -> " + path);
+        } catch (Exception e) {
+            System.out.println("Error exporting JSON : " + e.getMessage());
         }
     }
 }

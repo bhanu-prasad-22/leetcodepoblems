@@ -24,6 +24,7 @@ public class StudentMain {
             System.out.println("11.Search student by name(partial match).");
             System.out.println("12. Exit");
             System.out.println("13.Export students (sorted by name)");
+            System.out.println("14. Export students as JSON.");
             System.out.println("Enter your choice:");
             int choice;
             try {
@@ -140,6 +141,9 @@ public class StudentMain {
                     return;
                 case 13:
                     service.exportSortedByName("students_sorted.csv");
+                    break;
+                case 14:
+                    service.exportJson("students.json");
                     break;
 
                 default:
