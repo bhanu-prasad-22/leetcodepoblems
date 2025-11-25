@@ -8,6 +8,8 @@ public class StudentMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StudentService service = new StudentService();
+        service.loadFromFile("students.csv");
+        System.out.println("Loaded existing data (if available)");
 
         OUTER:
         while (true) {
