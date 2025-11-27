@@ -1,0 +1,11 @@
+[
+  {"status":"ok","cmd":"ADD","id":10},
+  {"status":"ok","cmd":"ADD","id":11},
+  [{"id":10,"name":"Test User","age":21},{"id":11,"name":"Hero","age":19}],
+  [],
+  {"id":11,"name":"Hero","age":19},
+  {"status":"deleted","id":10},
+  {"status":"exported","path":"students_api.json"},
+  {"status":"exported_sorted","path":"students_sorted_api.csv"},
+  [{"id":11,"name":"Hero","age":19}]
+]

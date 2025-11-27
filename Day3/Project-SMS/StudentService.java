@@ -206,4 +206,8 @@ public class StudentService {
             System.out.println("Error exporting JSON : " + e.getMessage());
         }
     }
+
+    public List<Student> getAllStudents() {
+        return new ArrayList<>(students);
+    }
 }

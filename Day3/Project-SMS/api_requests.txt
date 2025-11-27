@@ -1,0 +1,9 @@
+ADD 10|Test User|21
+ADD 11|Hero|19
+GET_ALL
+SEARCH_NAME an
+GET 11
+DELETE 10
+EXPORT_JSON students_api.json
+EXPORT_SORTED students_sorted_api.csv
+GET_ALL
