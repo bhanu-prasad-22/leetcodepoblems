@@ -1,0 +1,72 @@
+1456.Maximum Number Of Vowels in Substring of Given Length
+
+Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+
+Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+
+ 
+
+Example 1:
+
+Input: s = "abciiidef", k = 3
+Output: 3
+Explanation: The substring "iii" contains 3 vowel letters.
+Example 2:
+
+Input: s = "aeiou", k = 2
+Output: 2
+Explanation: Any substring of length 2 contains 2 vowels.
+Example 3:
+
+Input: s = "leetcode", k = 3
+Output: 2
+Explanation: "lee", "eet" and "ode" contain 2 vowels.
+
+program:
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        if(s==null && k<=0)
+            return 0;
+        int n=s.length();
+        if(k>n)
+        {
+            k=n;
+        }
+
+        boolean[] isVowel=new boolean[128];
+        isVowel['a']=isVowel['e']=isVowel['i']=isVowel['o']=isVowel['u']=true;
+        isVowel['A']=isVowel['E']=isVowel['I']=isVowel['O']=isVowel['U']=true;
+
+        int count=0;
+        for(int i=0;i<k;i++)
+        {
+            if(isVowel[s.charAt(i)])
+            {
+                count++;
+            }
+        }
+
+        int max=count;
+
+        for(int i=k;i<n;i++)
+        {
+            if(isVowel[s.charAt(i-k)])//decrement count if in process of shrinking if the letter is vowel 
+            {
+                count--;
+            }
+            if(isVowel[s.charAt(i)])//increment count if the new char is vowel
+            {
+                count++;
+            }
+
+            if(count>max)
+            {
+                max=count;
+            }
+        }
+
+
+       return max;
+    }
+}
