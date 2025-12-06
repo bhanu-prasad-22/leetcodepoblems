@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student UI</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-6">
+
+    <h1 class="text-3xl font-bold text-center mb-8">Student Cards</h1>
+
+    <!-- Grid container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="student-grid">
+
+        <!-- Student Card Example -->
+        <div class="bg-white p-5 rounded-xl shadow-md border hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold">Bhanu</h2>
+            <p class="text-gray-600 mt-1">Age: 20</p>
+
+            <div class="flex gap-3 mt-4">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    Edit
+                </button>
+                <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    Delete
+                </button>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-md border hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold">Chintu</h2>
+            <p class="text-gray-600 mt-1">Age: 18</p>
+
+            <div class="flex gap-3 mt-4">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    Edit
+                </button>
+                <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    Delete
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
